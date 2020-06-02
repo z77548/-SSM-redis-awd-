@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- MULTIPLE_TOPIC -->
+<mapper namespace="com.ssm.chapter.dao.MultipleTopicEntityDao">
+
+	<sql id="allColumns">
+		id, event_id, name, topic_content, fraction
+	</sql>
+
+
+	<select id="getOneTopic" parameterType="Int"
+		resultType="com.ssm.chapter.pojo.MultipleTopicEntity">
+		select
+		<include refid="allColumns" />
+		from multiple_topic where event_id=#{EventId} limit #{Start},#{End}
+	</select>
+	<select id="gets"
+		resultType="com.ssm.chapter.pojo.MultipleTopicEntity">
+		select
+		<include refid="allColumns" />
+		from multiple_topic
+	</select>
+	<delete id="delete" parameterType="int">
+		DELETE FROM multiple_topic
+		WHERE
+		id=#{id}
+	</delete>
+	<insert id="insert"
+		parameterType="com.ssm.chapter.pojo.MultipleTopicEntity">
+		INSERT INTO multiple_topic (
+		id, event_id, name,
+		topic_content, fraction
+		fraction
+		) VALUES (
+		#{id},
+		#{event_id,},
+		#{name},
+		#{choose_content},
+		#{fraction}
+		)
+	</insert>
+</mapper>

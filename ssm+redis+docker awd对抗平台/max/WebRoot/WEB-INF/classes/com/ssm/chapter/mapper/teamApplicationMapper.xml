@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssm.chapter.dao.teamApplicationDao">
+
+	<sql id="allColumns">
+		id, team_id, applicant_id, captain_id, applicant_name
+	</sql>
+	<select id="getteamApplication" parameterType="Int"
+		resultType="com.ssm.chapter.pojo.TeamApplicationEntity">
+		select
+		<include refid="allColumns" />
+		from TEAM_APPLICATION where captain_id=#{UserId}
+	</select>
+
+	<select id="getteamAppById" parameterType="Int"
+		resultType="com.ssm.chapter.pojo.TeamApplicationEntity">
+		select
+		<include refid="allColumns" />
+		from TEAM_APPLICATION where id=#{id}
+	</select>
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id"
+		parameterType="com.ssm.chapter.pojo.TeamApplicationEntity">
+		INSERT INTO
+		TEAM_APPLICATION (
+		id, team_id, applicant_id,
+		captain_id,
+		applicant_name
+		)
+		VALUES (
+		NULL,
+		#{team_id},
+		#{applicant_id},
+		#{captain_id},
+		#{applicant_name}
+		)
+	</insert>
+
+	<delete id="deleteapp" parameterType="int">
+		DELETE FROM
+		TEAM_APPLICATION WHERE
+		id=#{id}
+	</delete>
+</mapper>

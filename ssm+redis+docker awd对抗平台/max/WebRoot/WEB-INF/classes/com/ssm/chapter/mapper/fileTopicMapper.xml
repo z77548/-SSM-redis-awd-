@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- FILE_TOPIC -->
+<mapper namespace="com.ssm.chapter.dao.FileTopicEntityDao">
+	<!-- 字段映射 -->
+
+	<!-- 表所有字段 -->
+	<sql id="allColumns">
+		id, event_id, name, type, topic_name, introduction, file,
+		fraction
+	</sql>
+	<!-- -->
+
+	<select id="getOneTopic" parameterType="Int"
+		resultType="com.ssm.chapter.pojo.FileTopicEntity">
+		select
+		<include refid="allColumns" />
+		from file_topic where event_id=#{EventId} limit #{Start},#{End}
+	</select>
+	<select id="gets"
+		resultType="com.ssm.chapter.pojo.FileTopicEntity">
+		select
+		<include refid="allColumns" />
+		from file_topic
+	</select>
+	<delete id="delete" parameterType="int">
+		DELETE FROM file_topic WHERE
+		id=#{id}
+	</delete>
+
+	<insert id="insert"
+		parameterType="com.ssm.chapter.pojo.FileTopicEntity">
+		INSERT INTO multiple_topic (
+		id, event_id, name, type,
+		topic_name, introduction, file,
+		fraction
+		) VALUES (
+		#{id},
+		#{event_id,},
+		#{type},
+		#{topic_name},
+		#{introduction},
+		#{file},
+		#{fraction}
+		)
+	</insert>
+
+</mapper>

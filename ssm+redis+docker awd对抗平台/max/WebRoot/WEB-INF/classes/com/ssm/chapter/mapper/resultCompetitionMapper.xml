@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- RESULT_COMPETITION -->
+<mapper
+	namespace="com.ssm.chapter.dao.ResultCompetitionEntityDao">
+
+	<sql id="allColumns">
+		id, team_id, submit_number, radio_answer,
+		multiple_choice_answer,
+		flag_score, radio_score, multiple_choice_score,
+		event_id, already_answered1, already_answered2, already_answered3
+	</sql>
+	<!-- -->
+
+	<select id="getGameResult" parameterType="Int"
+		resultType="com.ssm.chapter.pojo.ResultCompetitionEntity">
+		select
+		<include refid="allColumns" />
+		from result_competition where event_id=#{EventId} and team_id=
+		#{TeamId}
+	</select>
+
+
+	<update id="updateGameResult"
+		parameterType="com.ssm.chapter.pojo.ResultCompetitionEntity">
+		update result_competition
+		<set>
+			<if test="team_id != null">
+				team_id = #{team_id},
+			</if>
+			<if test="submit_number != null">
+				submit_number = #{submit_number},
+			</if>
+			<if test="radio_answer != null">
+				radio_answer = #{radio_answer},
+			</if>
+			<if test="multiple_choice_answer != null">
+				multiple_choice_answer = #{multiple_choice_answer},
+			</if>
+			<if test="flag_score != null">
+				flag_score = #{flag_score},
+			</if>
+			<if test="radio_score != null">
+				radio_score = #{radio_score},
+			</if>
+			<if test="multiple_choice_score != null">
+				multiple_choice_score = #{multiple_choice_score},
+			</if>
+			<if test="event_id != null">
+				event_id = #{event_id},
+			</if>
+			<if test="already_answered1 != null">
+				already_answered1 = #{already_answered1},
+			</if>
+			<if test="already_answered2 != null">
+				already_answered2 = #{already_answered2},
+			</if>
+			<if test="already_answered3 != null">
+				already_answered3 = #{already_answered3}
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+
+
+	<insert id="insert"
+		parameterType="com.ssm.chapter.pojo.ResultCompetitionEntity">
+		insert into
+		result_competition (
+		id, team_id,
+		submit_number, radio_answer,
+		multiple_choice_answer,
+		flag_score,
+		radio_score, multiple_choice_score,
+		event_id, already_answered1,
+		already_answered2, already_answered3
+		)
+		values (
+		#{id},
+		#{team_id},
+		#{submit_number},
+		#{radio_answer},
+		#{multiple_choice_answer},
+		#{flag_score},
+		#{radio_score},
+		#{multiple_choice_score},
+		#{event_id},
+		#{already_answered1},
+		#{already_answered2},
+		#{already_answered3}
+		)
+	</insert>
+	<delete id="deleteResultCompetitionById" parameterType="Int">
+		DELETE
+		FROM RESULT_COMPETITION WHERE team_id = #{TeamId}
+	</delete>
+
+
+</mapper>

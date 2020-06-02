@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.chapter.dao.TopicDao">
+	<select id="getChooseCount" parameterType="Int" resultType="Int">
+		select count(1) as totalCount from choose_topic where
+		event_id=#{EventId}
+	</select>
+	<select id="getMultipleCount" parameterType="Int"
+		resultType="Int">
+		select count(1) as totalCount from multiple_topic where
+		event_id=#{EventId}
+	</select>
+	<select id="getFileCount" parameterType="Int" resultType="Int">
+		select
+		count(1) as totalCount from file_topic where event_id=#{EventId}
+	</select>
+	<select id="getAnswer" parameterType="Int"
+		resultType="com.ssm.chapter.pojo.TrueAnswer">
+		select id,answer,fraction from
+
+		<if test="Type == 1">
+			choose_topic
+		</if>
+		<if test="Type == 2">
+			multiple_topic
+		</if>
+		<if test="Type == 3">
+			file_topic
+		</if>
+		where id=#{Id}
+	</select>
+</mapper>

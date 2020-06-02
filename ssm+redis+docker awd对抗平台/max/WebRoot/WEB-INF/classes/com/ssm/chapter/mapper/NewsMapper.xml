@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.chapter.dao.NewsDao">
+	<sql id="allColumns">
+		id,publisher_id,recipient_id,data,publisher_name,time
+	</sql>
+	<select id="getNews" resultType="com.ssm.chapter.pojo.OneNew">
+		select
+		<include refid="allColumns" />
+		from news where
+		recipient_id=#{UserId}
+	</select>
+	<insert id="insertNews"
+		parameterType="com.ssm.chapter.pojo.OneNew">
+		INSERT INTO NEWS (
+		id,publisher_id,recipient_id,data,publisher_name,time
+		) VALUES (
+		#{id},
+		#{publisher_id,},
+		#{recipient_id},
+		#{data},
+		#{publisher_name},
+		#{time}
+		)
+	</insert>
+
+	<delete id="deleteNews" parameterType="int">
+		DELETE FROM news WHERE
+		id=#{id}
+	</delete>
+</mapper>

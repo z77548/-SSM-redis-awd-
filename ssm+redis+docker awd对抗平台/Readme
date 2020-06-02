@@ -1,0 +1,10 @@
+基于SSM+Redis的awd对抗系统
+
+请修改config包里面的数据库配置和DockerServiceimpl.java里面的docker服务器配置。
+
+tomcat里面WEB-INF目录要包括update（上传路径可再config包里面修改） certs（安全证书路径可在DockerServiceimpl.java里面修改）
+
+erbaoawd应放在/usr目录下,web渗透环境放在erbaoawd下面并且修改/admin/docker.jsp,run.sh为docker运行后环境初始化，里面可修改战队初始账号密码等信息。erbaoawd/team目录为各站队容器初始化WEB环境可单独恢复。
+
+Redis、docker、mysql都要开启
+

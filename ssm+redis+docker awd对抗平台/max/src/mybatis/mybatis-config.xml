@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE configuration  
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<mappers>
+		<mapper
+			resource="com/ssm/chapter/mapper/OrdinaryUsersMapper.xml" />
+		<mapper resource="com/ssm/chapter/mapper/NewsMapper.xml" />
+		<mapper
+			resource="com/ssm/chapter/mapper/TeamInformationMapper.xml" />
+		<mapper resource="com/ssm/chapter/mapper/EventMapper.xml" />
+		<mapper resource="com/ssm/chapter/mapper/TopicMapper.xml" />
+		<mapper resource="com/ssm/chapter/mapper/chooseTopicMapper.xml" />
+		<mapper
+			resource="com/ssm/chapter/mapper/multipleTopicMapper.xml" />
+		<mapper resource="com/ssm/chapter/mapper/fileTopicMapper.xml" />
+		<mapper
+			resource="com/ssm/chapter/mapper/resultCompetitionMapper.xml" />
+		<mapper
+			resource="com/ssm/chapter/mapper/teamApplicationMapper.xml" />
+		<mapper resource="com/ssm/chapter/mapper/dockerMapper.xml" />
+		<mapper resource="com/ssm/chapter/mapper/awdMapper.xml" />
+	</mappers>
+</configuration>

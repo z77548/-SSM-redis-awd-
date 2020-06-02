@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.chapter.dao.EventDao">
+	<select id="getEvents" resultType="com.ssm.chapter.pojo.Event">
+		select * from event
+	</select>
+	<select id="getOneEvent" parameterType="Int"
+		resultType="com.ssm.chapter.pojo.Event">
+		select * from event where id=#{id}
+	</select>
+
+	<insert id="insertEvent"
+		parameterType="com.ssm.chapter.pojo.Event">
+		INSERT INTO EVENT (
+		ID, NAME, INTIME, OUTIME, JIANJIE,
+		FILE,awd
+		) VALUES (
+		#{id},
+		#{name},
+		#{intime},
+		#{outime},
+		#{jianjie},
+		#{file},
+		#{awd}
+
+		)
+	</insert>
+	<select id="findAwdEvent"
+		resultType="com.ssm.chapter.pojo.Event">
+		SELECT * FROM event WHERE awd=1
+	</select>
+	<delete id="deleteEvent" parameterType="int">
+		DELETE FROM event WHERE
+		id=#{id}
+	</delete>
+</mapper>

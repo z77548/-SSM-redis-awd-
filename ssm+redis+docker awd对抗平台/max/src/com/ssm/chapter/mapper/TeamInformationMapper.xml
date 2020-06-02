@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.chapter.dao.TeamInformationDao">
+	<sql id="allColumns">
+		id, name, captain_id, team_member_1_id, team_member_2_id,
+		event_id,
+		count, captain_name,
+		team_member_2_name, team_member_1_name
+	</sql>
+	<select id="getTeamInformation" parameterType="int"
+		resultType="com.ssm.chapter.pojo.TeamInformation">
+		select
+		<include refid="allColumns" />
+		from team where team_member_1_id=#{UserId} or
+		team_member_2_id=#{UserId} or captain_id=#{UserId}
+	</select>
+
+	<select id="getTeamCount" parameterType="int"
+		resultType="com.ssm.chapter.pojo.TeamInformation">
+		select
+		<include refid="allColumns" />
+		from team where id =#{Id}
+	</select>
+
+
+	<select id="getTeamByName" parameterType="String"
+		resultType="com.ssm.chapter.pojo.TeamInformation">
+		select
+		<include refid="allColumns" />
+		from team where name =#{Name}
+	</select>
+	<insert id="insertTeam" useGeneratedKeys="true" keyProperty="id"
+		parameterType="com.ssm.chapter.pojo.InsertTeam">
+		INSERT INTO team (id, name, captain_id,
+		team_member_1_id,
+		team_member_2_id,
+		event_id, count, captain_name,
+		team_member_2_name,
+		team_member_1_name)
+		VALUES (NULL, #{Name},
+		#{UserId}, 0, 0,
+		NULL, 1,
+		#{UserName}, 'null', 'null')
+	</insert>
+
+	<update id="updateTeam"
+		parameterType="com.ssm.chapter.pojo.TeamInformation">
+		UPDATE team
+		<set>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="captain_id != null">
+				captain_id = #{captain_id},
+			</if>
+			<if test="team_member_1_id != null">
+				team_member_1_id = #{team_member_1_id},
+			</if>
+			<if test="team_member_2_id != null">
+				team_member_2_id = #{team_member_2_id},
+			</if>
+			<if test="event_id != null">
+				event_id = #{event_id},
+			</if>
+			<if test="count != null">
+				count = #{count},
+			</if>
+			captain_name = #{captain_name},
+			team_member_2_name =
+			#{team_member_2_name},
+			team_member_1_name = #{team_member_1_name}
+		</set>
+		WHERE id = #{id}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+		team WHERE
+		id=#{id}
+	</delete>
+
+
+	<select id="getTeams"
+		resultType="com.ssm.chapter.pojo.TeamInformation">
+		select
+		<include refid="allColumns" />
+		from team
+	</select>
+</mapper>

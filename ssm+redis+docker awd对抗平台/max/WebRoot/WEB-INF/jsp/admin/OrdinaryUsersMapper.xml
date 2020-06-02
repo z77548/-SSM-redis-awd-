@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.chapter.dao.OrdinaryUsersDao">
+	<sql id="allColumns">
+		id, name, passwd, truename, idcard, iphone, email, type,
+		team_id, captain, mac
+	</sql>
+	<select id="getOrdinaryUsers" parameterType="String"
+		resultType="com.ssm.chapter.pojo.OrdinaryUsers">
+		select
+		<include refid="allColumns" />
+		from accout where name= #{name}
+	</select>
+
+	<select id="getOrdinaryUsersByIdcard" parameterType="String"
+		resultType="com.ssm.chapter.pojo.OrdinaryUsers">
+		select
+		<include refid="allColumns" />
+		from accout where name= #{name} or truename=
+		#{truename} or
+		idcard=#{idcard}
+	</select>
+	<insert id="insertSigner"
+		parameterType="com.ssm.chapter.pojo.Signer">
+		INSERT INTO accout (id, name, passwd, truename, idcard,
+		iphone, email, type,
+		team_id, captain, mac) VALUES (#{id}, #{name},
+		#{passwd}, #{truename},
+		#{idcard}, #{iphone}, #{email}, '0', '0', '0',
+		'null')
+	</insert>
+	<update id="changeMac">
+		UPDATE accout SET mac=#{mac} WHERE
+		id=#{UserId}
+
+	</update>
+	<update id="changePersonal">
+		UPDATE accout SET iphone=#{iphone} ,email=#{email}
+		,passwd=#{passwd} WHERE id=#{UserId}
+	</update>
+	<update id="changeTeam">
+		UPDATE accout SET team_id=#{TeamId} ,captain=1 WHERE
+		id=#{UserId}
+	</update>
+	<update id="changeall"
+		parameterType="com.ssm.chapter.pojo.OrdinaryUsers">
+		UPDATE accout SET
+		team_id=#{team_id},captain=#{captain}
+		WHERE
+		id=#{id}
+	</update>
+
+	<update id="quitTeam" parameterType="int">
+		UPDATE accout SET team_id=0
+		WHERE
+		id=#{UserId}
+	</update>
+
+	<select id="getUserTeamId" parameterType="Int" resultType="Int">
+		select team_id ifnull(null,0) from accout where id= #{UserId}
+	</select>
+
+	<select id="getOrdinaryUsersByUserId" parameterType="Int"
+		resultType="com.ssm.chapter.pojo.OrdinaryUsers">
+		select
+		<include refid="allColumns" />
+		from accout where id= #{UserId}
+	</select>
+
+	<select id="getOrdinaryUsersByUsers"
+		resultType="com.ssm.chapter.pojo.OrdinaryUsers">
+		select
+		<include refid="allColumns" />
+		from accout
+	</select>
+
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+		accout WHERE
+		id=#{id}
+	</delete>
+
+</mapper>
